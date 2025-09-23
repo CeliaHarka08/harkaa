@@ -6,10 +6,12 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
+    background-size: cover;
+    background-position: center;
 }
 
 .quiz-container {
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.8); /* Fundo transparente para o conteúdo */
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);

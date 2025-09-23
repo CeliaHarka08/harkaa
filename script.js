@@ -3,52 +3,62 @@ const questions = [
     {
         question: "Qual é o maior país do mundo em área territorial?",
         options: ["Estados Unidos", "China", "Canadá", "Rússia"],
-        answer: "Rússia"
+        answer: "Rússia",
+        image: "images/russia.jpg" // Imagem para a pergunta 1
     },
     {
         question: "Quem pintou a Mona Lisa?",
         options: ["Vincent van Gogh", "Pablo Picasso", "Leonardo da Vinci", "Claude Monet"],
-        answer: "Leonardo da Vinci"
+        answer: "Leonardo da Vinci",
+        image: "images/monalisa.jpg" // Imagem para a pergunta 2
     },
     {
         question: "Em que ano o homem pisou pela primeira vez na Lua?",
         options: ["1969", "1975", "1982", "1959"],
-        answer: "1969"
+        answer: "1969",
+        image: "images/lua.jpg" // Imagem para a pergunta 3
     },
     {
         question: "Qual é o maior oceano do planeta?",
         options: ["Oceano Atlântico", "Oceano Índico", "Oceano Ártico", "Oceano Pacífico"],
-        answer: "Oceano Pacífico"
+        answer: "Oceano Pacífico",
+        image: "images/oceano.jpg" // Imagem para a pergunta 4
     },
     {
         question: "Qual é o símbolo químico do ouro?",
         options: ["Ag", "Au", "Fe", "Hh"],
-        answer: "Au"
+        answer: "Au",
+        image: "images/ouro.jpg" // Imagem para a pergunta 5
     },
     {
         question: "Quem foi o primeiro presidente do Brasil?",
         options: ["Getúlio Vargas", "Juscelino Kubitschek", "Marechal Deodoro da Fonseca", "Dom Pedro II"],
-        answer: "Marechal Deodoro da Fonseca"
+        answer: "Marechal Deodoro da Fonseca",
+        image: "images/deodoro.jpg" // Imagem para a pergunta 6
     },
     {
         question: "O que significa a sigla ONU?",
         options: ["Organização Nacional das Nações Unidas", "Organização das Nações Unidas", "Organização de Navegação Universal", "Observatório Nacional de Unidades"],
-        answer: "Organização das Nações Unidas"
+        answer: "Organização das Nações Unidas",
+        image: "images/onu.jpg" // Imagem para a pergunta 7
     },
     {
         question: "Qual é a capital da Austrália?",
         options: ["Sydney", "Melbourne", "Canberra", "Brisbane"],
-        answer: "Canberra"
+        answer: "Canberra",
+        image: "images/canberra.jpg" // Imagem para a pergunta 8
     },
     {
         question: "Em que continente está localizado o deserto do Saara?",
         options: ["Ásia", "África", "América do Norte", "América do Norte"],
-        answer: "África"
+        answer: "África",
+        image: "images/saara.jpg" // Imagem para a pergunta 9
     },
     {
         question: "Quem escreveu a obra Dom Casmurro?",
         options: ["Machado de Assis", "José de Alencar", "Graciliano Ramos", "Monteiro Lobato"],
-        answer: "Machado de Assis"
+        answer: "Machado de Assis",
+        image: "images/domcasmurro.jpg" // Imagem para a pergunta 10
     }
 ];
 
@@ -61,6 +71,9 @@ const resultMessage = document.getElementById("result-message");
 function showQuestion() {
     const currentQuestion = questions[currentQuestionIndex];
     questionElement.textContent = currentQuestion.question;
+
+    // Define o fundo da página com a imagem da pergunta
+    document.body.style.backgroundImage = `url(${currentQuestion.image})`;
 
     // Limpa as opções anteriores
     optionsContainer.innerHTML = '';
