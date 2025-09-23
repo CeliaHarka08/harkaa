@@ -76,14 +76,14 @@ const incorrectCountElement = document.getElementById("incorrect-count");
 
 // Função para iniciar o quiz
 document.getElementById("start-btn").addEventListener("click", () => {
-    startScreen.style.display = "none";
-    quizContainer.style.display = "block";
-    showQuestion();
+    startScreen.style.display = "none";  // Esconde a tela de início
+    quizContainer.style.display = "block"; // Exibe o quiz
+    showQuestion(); // Exibe a primeira pergunta
 });
 
 // Função para sair do quiz
 document.getElementById("exit-btn").addEventListener("click", () => {
-    alert("Até a próxima!");
+    alert("Até a próxima!"); // Exibe mensagem e fecha o navegador
     window.close();
 });
 
@@ -91,14 +91,9 @@ document.getElementById("exit-btn").addEventListener("click", () => {
 function showQuestion() {
     const currentQuestion = questions[currentQuestionIndex];
     questionElement.textContent = currentQuestion.question;
+    document.body.style.backgroundImage = `url(${currentQuestion.image})`; // Altera o fundo com base na imagem da pergunta
 
-    // Define o fundo da página com a imagem da pergunta
-    document.body.style.backgroundImage = `url(${currentQuestion.image})`;
-
-    // Limpa as opções anteriores
-    optionsContainer.innerHTML = '';
-
-    // Cria os botões para as opções
+    optionsContainer.innerHTML = ''; // Limpa as opções anteriores
     currentQuestion.options.forEach(optionText => {
         const button = document.createElement("button");
         button.textContent = optionText;
@@ -107,15 +102,50 @@ function showQuestion() {
         optionsContainer.appendChild(button);
     });
 
-    resultMessage.textContent = '';
+    resultMessage.textContent = ''; // Limpa qualquer mensagem anterior de resultado
 }
 
 // Função para verificar a resposta
 function checkAnswer(selectedOption, correctAnswer) {
     const options = document.querySelectorAll('.option');
-    options.forEach(option => option.disabled = true);
+    options.forEach(option => option.disabled = true); // Desativa os botões após a resposta
 
     if (selectedOption === correctAnswer) {
         resultMessage.textContent = "Parabéns, você acertou!";
+        resultMessage.style.color = "#28a745"; // Verde
+        correctAnswers++;
+    } else {
+        resultMessage.textContent = `Ops, a resposta correta era: ${correctAnswer}`;
+        resultMessage.style.color = "#dc3545"; // Vermelho
+        incorrectAnswers++;
+    }
 
+    // Passa para a próxima pergunta após um pequeno atraso
+    setTimeout(() => {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+            showQuestion(); // Exibe a próxima pergunta
+        } else {
+            showEndScreen(); // Exibe a tela final quando o quiz terminar
+        }
+    }, 2000); // 2 segundos de atraso
+}
 
+// Função para exibir a tela final com resultados
+function showEndScreen() {
+    quizContainer.style.display = "none"; // Esconde o quiz
+    endScreen.style.display = "block"; // Exibe a tela final
+
+    // Atualiza o número de acertos e erros
+    correctCountElement.textContent = correctAnswers;
+    incorrectCountElement.textContent = incorrectAnswers;
+}
+
+// Função para reiniciar o quiz
+document.getElementById("restart-btn").addEventListener("click", () => {
+    correctAnswers = 0;
+    incorrectAnswers = 0;
+    currentQuestionIndex = 0;
+    endScreen.style.display = "none"; // Esconde a tela final
+    startScreen.style.display = "block"; // Exibe a tela inicial
+});
